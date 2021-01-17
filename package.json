@@ -1,0 +1,38 @@
+{
+  "name": "react-learning",
+  "version": "1.0.0",
+  "description": "React geekbrains course",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "webpack serve --open --watch",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ezhk/react-learning.git"
+  },
+  "author": "Andrey Kiselev <kiselevandrew@yandex.ru>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ezhk/react-learning/issues"
+  },
+  "homepage": "https://github.com/ezhk/react-learning#readme",
+  "dependencies": {
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "@babel/preset-react": "^7.12.10",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^5.0.1",
+    "html-webpack-plugin": "^4.5.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "style-loader": "^2.0.0",
+    "webpack": "^5.11.1",
+    "webpack-dev-server": "^3.11.1"
+  },
+  "devDependencies": {
+    "webpack-cli": "^4.3.1"
+  }
+}
