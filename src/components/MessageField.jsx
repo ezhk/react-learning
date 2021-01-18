@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { Button, TextField } from "@material-ui/core";
+
 import Message from "./Message.jsx";
 
 const MessageField = () => {
@@ -17,7 +19,10 @@ const MessageField = () => {
   const submitMessage = (event) => {
     event.preventDefault();
 
-    setMessages(messages.concat({ author: "Me", text: inputMessage }));
+    // Ignore empty messages.
+    if (inputMessage === "") return;
+
+    setMessages([...messages, { author: "Me", text: inputMessage }]);
     setInputMessage("");
 
     setRobotAnswer(`i'm not hear something about "${inputMessage}".`);
@@ -34,11 +39,11 @@ const MessageField = () => {
       ))}
 
       <br />
-      <form className="input-message-form">
+      <form className="input-message-form" onSubmit={submitMessage}>
         <label htmlFor="message-input"></label>
-        <input id="message-input" type="text" value={inputMessage} onChange={handleInputMessageChange} />
+        <TextField id="standard-basic" label="Enter message" value={inputMessage} onChange={handleInputMessageChange} />
 
-        <button onClick={submitMessage}>Send</button>
+        <Button type="submit">Send</Button>
       </form>
     </div>
   );
