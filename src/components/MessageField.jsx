@@ -3,18 +3,35 @@ import { Button, TextField } from "@material-ui/core";
 
 import Message from "./Message.jsx";
 
+const RobotName = "Robot";
+
 const MessageField = () => {
+  const [messageID, setMessageID] = useState(0);
   const [messages, setMessages] = useState([]);
+
   const [inputMessage, setInputMessage] = useState("");
 
-  const [robotAnswer, setRobotAnswer] = useState(false);
-
   useEffect(() => {
-    if (robotAnswer !== false) {
-      setMessages(messages.concat({ author: "Robot", text: robotAnswer }));
-      setRobotAnswer(false);
+    let timeout;
+    if (messages.length && messages[messages.length - 1].author !== RobotName) {
+      timeout = setTimeout(() => {
+        setMessages([
+          ...messages,
+          {
+            id: messageID,
+            author: RobotName,
+            text: `i'm not hear something about "${messages[messages.length - 1].text}".`,
+          },
+        ]);
+
+        setMessageID(messageID + 1);
+      }, 2000);
+
+      return () => {
+        clearTimeout(timeout);
+      };
     }
-  }, [messages, robotAnswer, setMessages]);
+  }, [messages, setMessages]);
 
   const submitMessage = (event) => {
     event.preventDefault();
@@ -22,10 +39,11 @@ const MessageField = () => {
     // Ignore empty messages.
     if (inputMessage === "") return;
 
-    setMessages([...messages, { author: "Me", text: inputMessage }]);
-    setInputMessage("");
+    setMessages([...messages, { id: messageID, author: "Me", text: inputMessage }]);
+    setMessageID(messageID + 1);
 
-    setRobotAnswer(`i'm not hear something about "${inputMessage}".`);
+    // Clean form input.
+    setInputMessage("");
   };
 
   const handleInputMessageChange = (event) => {
@@ -34,8 +52,8 @@ const MessageField = () => {
 
   return (
     <div className="message-field">
-      {messages.map((message, idx) => (
-        <Message message={message} key={idx} />
+      {messages.map((message) => (
+        <Message message={message} key={message.id} />
       ))}
 
       <br />

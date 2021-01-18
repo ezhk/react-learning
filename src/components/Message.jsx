@@ -11,6 +11,7 @@ const Message = ({ message }) => {
 
 Message.propTypes = {
   message: PropTypes.exact({
+    id: PropTypes.number,
     author: PropTypes.string,
     text: PropTypes.string,
   }),
