@@ -40,9 +40,7 @@ const MessageField = () => {
 
       <br />
       <form className="input-message-form" onSubmit={submitMessage}>
-        <label htmlFor="message-input"></label>
         <TextField id="standard-basic" label="Enter message" value={inputMessage} onChange={handleInputMessageChange} />
-
         <Button type="submit">Send</Button>
       </form>
     </div>
