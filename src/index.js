@@ -1,49 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-const MessageComponent = (props) => <div>{props.text}</div>;
-const MessageField = (props) => {
-  return props.messages.map((message) => <MessageComponent text={message} />);
-};
+import "./index.css";
+import App from "./App.jsx";
+import reportWebVitals from "./reportWebVitals";
 
-class Messages extends React.Component {
-  constructor() {
-    super();
+ReactDOM.render(<App />, document.getElementById("root"));
 
-    this.messages = ["Привет", "Как дела?"];
-    this.state = { value: "" };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleChange(event) {
-    this.setState({ value: event.target.value });
-  }
-
-  handleSubmit(event) {
-    this.messages.push(this.state.value);
-    this.setState({ value: "" });
-
-    event.preventDefault();
-  }
-
-  render() {
-    return (
-      <div>
-        <MessageField messages={this.messages} />
-
-        <hr />
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Message:
-            <input type="text" value={this.state.value} onChange={this.handleChange} />
-          </label>
-          <input type="submit" value="Submit" onChange={this.handleChange} />
-        </form>
-      </div>
-    );
-  }
-}
-
-ReactDOM.render(<Messages />, document.getElementById("root"));
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals(console.log);
