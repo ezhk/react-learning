@@ -45,6 +45,7 @@ html, body {
 
 .title {
   display: block;
+  margin-top: 5px;
 
   text-align: center;
   font-size: 1.1rem;
@@ -85,14 +86,13 @@ html, body {
     border-radius: 3px;
 
     padding: 3px 5px;
-    background-color: #6002ee;
-    color: white;
+    background-color: #f1e4f1;
   }
 }
 
 .contacts {
   padding: 0 5px;
-  margin-left: 5px;
+  margin-left: 10px;
   width: 20%;
 
   background-color: #d4bff9;
