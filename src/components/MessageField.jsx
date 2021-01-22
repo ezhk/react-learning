@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, TextField } from "@material-ui/core";
 
-import Message from "./Message.jsx";
+import Message from "./Message";
 
 const RobotName = "Robot";
 
@@ -50,16 +50,27 @@ const MessageField = () => {
     setInputMessage(event.target.value);
   };
 
+  const renderMessages = (message) => {
+    return <Message message={message} key={message.id} />;
+  };
+
   return (
     <div className="message-field">
-      {messages.map((message) => (
-        <Message message={message} key={message.id} />
-      ))}
+      <span className="title">Messages</span>
+      <div className="message-field-messages">{messages.map(renderMessages)}</div>
 
       <br />
-      <form className="input-message-form" onSubmit={submitMessage}>
-        <TextField id="standard-basic" label="Enter message" value={inputMessage} onChange={handleInputMessageChange} />
-        <Button type="submit">Send</Button>
+      <form className="message-field-form" onSubmit={submitMessage}>
+        <TextField
+          id="standard-basic"
+          className="message-field-input"
+          label="Enter message"
+          value={inputMessage}
+          onChange={handleInputMessageChange}
+        />
+        <Button type="submit" className="message-field-button" color="primary" variant="outlined">
+          Send
+        </Button>
       </form>
     </div>
   );

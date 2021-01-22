@@ -1,0 +1,107 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+
+  height: 100%;
+}
+
+.header,
+.footer {
+  margin: 5px;
+
+  height: 50px;
+  line-height: 50px;
+  font-size: 1.2rem;
+
+  border-radius: 5px;  
+  color: white;
+  background-color: #6002ee;
+}
+
+.header {
+  padding-left: 10px;
+}
+.footer {
+  padding-right: 10px;
+  text-align: right;
+}
+
+.container {
+  margin: 0 5px;
+  flex-grow: 1;
+
+  display: flex;
+  flex-direction: row;
+}
+
+.title {
+  display: block;
+
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.message-field {
+  height: 100%;
+  width: 80%;
+
+  display: flex;
+  flex-direction: column;
+
+  &-messages {
+    flex-grow: 1;
+  }
+
+  &-form {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  &-input {
+    width: 100%;
+  }
+  &-button {
+    width: 150px;
+    margin-left: 10px !important;
+  }
+}
+
+.message {
+  display: flex;
+  margin-bottom: 3px;
+
+  &-text {
+    display: inline-flex;
+    border-radius: 3px;
+
+    padding: 3px 5px;
+    background-color: #6002ee;
+    color: white;
+  }
+}
+
+.contacts {
+  padding: 0 5px;
+  margin-left: 5px;
+  width: 20%;
+
+  background-color: #d4bff9;
+  border-radius: 5px;
+
+  &-root {
+    margin: 0 !important;
+  }
+  &-item {
+    font-weight: 200 !important;
+  }
+}

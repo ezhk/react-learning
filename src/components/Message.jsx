@@ -3,8 +3,14 @@ import PropTypes from "prop-types";
 
 const Message = ({ message }) => {
   return (
-    <div className="message">
-      {message.author}: {message.text}
+    <div
+      className="message"
+      style={message.author === "Me" ? { justifyContent: "flex-end" } : { justifySelf: "flex-start" }}
+    >
+      <div className="message-text">
+        {message.author !== "Me" ? `${message.author}: ` : null}
+        {message.text}
+      </div>
     </div>
   );
 };
