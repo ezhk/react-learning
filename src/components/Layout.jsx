@@ -1,19 +1,16 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 
-import Header from "./Header";
-import Footer from "./Footer";
 import MessageField from "./MessageField";
 import ChatList from "./ChatList";
 
 export default function Layout() {
+  const { contactID } = useParams();
+
   return (
     <>
-      <Header />
-      <div className="container">
-        <MessageField className="message-field" />
-        <ChatList className="chat-list" />
-      </div>
-      <Footer />
+      <MessageField className="message-field" selectedContactID={contactID} />
+      <ChatList className="chat-list" selectedContactID={contactID} />
     </>
   );
 }
