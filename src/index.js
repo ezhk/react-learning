@@ -12,7 +12,7 @@ import Layout from "./components/Layout";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
-  <>
+  <React.StrictMode>
     <BrowserRouter>
       <Header />
       <div className="container">
@@ -27,7 +27,7 @@ ReactDOM.render(
       </div>
       <Footer />
     </BrowserRouter>
-  </>,
+  </React.StrictMode>,
   document.getElementById("root")
 );
 
