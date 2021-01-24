@@ -8,9 +8,12 @@ export default function Header() {
         Messenger
       </Link>
 
-      <Link className="header-link" to="/profile">
-        Profile
-      </Link>
+      <div className="header-profile">
+        <Link className="header-link" to="/profile">
+          Profile
+        </Link>
+        <img className="header-image" src="images/profile.svg" alt="" />
+      </div>
     </div>
   );
 }

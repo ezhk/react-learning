@@ -15,6 +15,7 @@ ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Header />
+
       <div className="container">
         <Switch>
           <Route path="/profile">
@@ -26,6 +27,7 @@ ReactDOM.render(
         </Switch>
       </div>
     </BrowserRouter>
+
     <Footer />
   </React.StrictMode>,
   document.getElementById("root")

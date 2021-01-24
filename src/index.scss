@@ -42,11 +42,17 @@ html, body {
   &-link:hover {
     color: #d4bff9
   }
+  &-profile {
+    display: flex;
+  }
+  &-image {
+    margin-left: 15px;
+    height: 40px;
+    width: 40px;
+    align-self: center;
 
-
-  &-link-disabled {
-    color: unset;
-    text-decoration: none;
+    border-radius: 5px;
+    background-color: white;
   }
 }
 .footer {
