@@ -25,8 +25,8 @@ ReactDOM.render(
           </Route>
         </Switch>
       </div>
-      <Footer />
     </BrowserRouter>
+    <Footer />
   </React.StrictMode>,
   document.getElementById("root")
 );
