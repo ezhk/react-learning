@@ -28,7 +28,7 @@ const ChatList = ({ selectedContactID }) => {
    * @param {number} idx
    */
   const renderContactList = (contact, idx) => {
-    if (selectedContactID !== undefined && selectedContactID >= contacts.length) {
+    if (selectedContactID !== undefined && contacts[selectedContactID] === undefined) {
       return <Redirect to="/" />;
     }
 
