@@ -1,10 +1,11 @@
 import React from "react";
 
 import { render, screen } from "@testing-library/react";
-import App from "./App.jsx";
+import Layout from "./components/Layout";
 
 test("renders learn react link", () => {
-  render(<App />);
+  render(<Layout />);
+
   const buttonElement = screen.getByText(/Send/i);
   expect(buttonElement).toBeInTheDocument();
 });
