@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import { List, ListItemText } from "@material-ui/core";
@@ -14,7 +14,7 @@ const ChatList = ({ selectedContactID }) => {
    */
   const contactStyle = (idx) => {
     // Compare string selectedContactID and number idx.
-    if (selectedContactID && selectedContactID == idx) {
+    if (selectedContactID == idx) {
       return { fontWeight: "bold" };
     }
 
@@ -23,10 +23,15 @@ const ChatList = ({ selectedContactID }) => {
 
   /**
    * Render contect and generate link to chat ID.
+   * If chat ID defined and not exist, redirect to default page.
    * @param {string} contact
    * @param {number} idx
    */
   const renderContactList = (contact, idx) => {
+    if (selectedContactID !== undefined && selectedContactID >= contacts.length) {
+      return <Redirect to="/" />;
+    }
+
     return (
       <ListItemText classes={{ root: "contacts-root" }} key={idx}>
         <Link className="contacts-link" to={"/chat/" + idx}>
