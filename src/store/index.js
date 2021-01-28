@@ -3,10 +3,12 @@ import { combineReducers } from "redux";
 
 import contactReducer from "./contact/reducer";
 import messageReducer from "./message/reducer";
+import profileReducer from "./profile/reducer";
 
 export const mainReducer = combineReducers({
   contact: contactReducer,
   message: messageReducer,
+  profile: profileReducer,
 });
 export const store = createStore(
   mainReducer,
