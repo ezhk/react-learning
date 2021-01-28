@@ -8,4 +8,7 @@ export const mainReducer = combineReducers({
   contact: contactReducer,
   message: messageReducer,
 });
-export const store = createStore(mainReducer);
+export const store = createStore(
+  mainReducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
