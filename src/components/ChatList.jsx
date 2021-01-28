@@ -1,20 +1,20 @@
 import React, { useState } from "react";
 import { Redirect, Link } from "react-router-dom";
+import { connect } from "react-redux";
+
 import PropTypes from "prop-types";
 
 import { List, ListItemText } from "@material-ui/core";
 
-const ChatList = ({ selectedContactID }) => {
-  const [contacts, setContacts] = useState(["Pollux", "Castor 6", "γ Gem", "μ Gem"]);
-
+const ChatList = ({ contacts, selectedContactID }) => {
   /**
    * Define styles for contacts,
    * based on selected contact ID.
-   * @param {number} idx
+   * @param {string} userID
    */
-  const contactStyle = (idx) => {
+  const contactStyle = (userID) => {
     // Compare string selectedContactID and number idx.
-    if (selectedContactID == idx) {
+    if (selectedContactID === userID) {
       return { fontWeight: "bold" };
     }
 
@@ -23,35 +23,38 @@ const ChatList = ({ selectedContactID }) => {
 
   /**
    * Render contect and generate link to chat ID.
-   * If chat ID defined and not exist, redirect to default page.
-   * @param {string} contact
-   * @param {number} idx
+   * @param {string} userID
+   * @param {string} userName
    */
-  const renderContactList = (contact, idx) => {
-    if (selectedContactID !== undefined && contacts[selectedContactID] === undefined) {
-      return <Redirect to="/" />;
-    }
-
+  const renderContactList = ([userID, userName]) => {
     return (
-      <ListItemText classes={{ root: "contacts-root" }} key={idx}>
-        <Link className="contacts-link" to={"/chat/" + idx}>
-          <span style={contactStyle(idx)}>{contact}</span>
+      <ListItemText classes={{ root: "contacts-root" }} key={userID}>
+        <Link className="contacts-link" to={"/chat/" + userID}>
+          <span style={contactStyle(userID)}>{userName}</span>
         </Link>
       </ListItemText>
     );
   };
 
+  // If chat ID defined and not exist, redirect to default page.
+  if (selectedContactID && !contacts[selectedContactID]) {
+    return <Redirect to="/" />;
+  }
+
   return (
     <div className="contacts">
       <span className="title">Contacts</span>
-      <List>{contacts.map(renderContactList)}</List>
+      <List>{Object.entries(contacts).map(renderContactList)}</List>
     </div>
   );
 };
 
 ChatList.propTypes = {
-  //   contacts: PropTypes.arrayOf(PropTypes.string),
+  contacts: PropTypes.objectOf(PropTypes.string),
   selectedContactID: PropTypes.string,
 };
 
-export default ChatList;
+const mapStateToProps = (state) => {
+  return { contacts: state.contact };
+};
+export default connect(mapStateToProps)(ChatList);

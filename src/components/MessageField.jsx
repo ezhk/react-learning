@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 import { Button, TextField } from "@material-ui/core";
 
 import Message from "./Message";
+import { putMessage } from "../store/message/actions";
 
 const RobotName = "Robot";
 
-const MessageField = ({ selectedContactID }) => {
-  const [messageID, setMessageID] = useState(0);
-  const [messages, setMessages] = useState({});
-
+const MessageField = ({ messages, putMessage, selectedContactID }) => {
+  console.log(messages);
   const [inputMessage, setInputMessage] = useState("");
 
   /**
@@ -19,21 +19,7 @@ const MessageField = ({ selectedContactID }) => {
    * @param {string} text
    */
   const appendMessage = (author, text) => {
-    if (selectedContactID === undefined) return;
-
-    const updatedMessagesByID = {
-      [selectedContactID]: [
-        ...(messages[selectedContactID] || []),
-        {
-          id: messageID,
-          author: author,
-          text: text,
-        },
-      ],
-    };
-
-    setMessages({ ...messages, ...updatedMessagesByID });
-    setMessageID(messageID + 1);
+    putMessage({ userID: selectedContactID, author, text });
   };
 
   /**
@@ -52,7 +38,7 @@ const MessageField = ({ selectedContactID }) => {
         clearTimeout(timeout);
       };
     }
-  }, [messages, setMessages]);
+  }, [messages]);
 
   /**
    * Click button event.
@@ -139,7 +125,15 @@ const MessageField = ({ selectedContactID }) => {
 };
 
 MessageField.propTypes = {
+  messages: PropTypes.any,
+  putMessage: PropTypes.any,
   selectedContactID: PropTypes.string,
 };
 
-export default MessageField;
+const mapStateToProps = (state) => {
+  return { messages: state.message };
+};
+const mapDispatchToProps = (dispatch) => {
+  return { putMessage: (payload) => dispatch(putMessage(payload)) };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(MessageField);
