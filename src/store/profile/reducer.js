@@ -1,5 +1,5 @@
 const initialState = {
-  userpic: "images/profile.svg",
+  userpic: "/images/profile.svg",
 };
 
 export default function profileReducer(state = initialState, action) {

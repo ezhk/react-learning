@@ -159,3 +159,13 @@ html, body {
     text-decoration: none;
   }
 }
+
+.not-found {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 2rem;
+  height: 100%;
+  width: 100%;
+}

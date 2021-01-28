@@ -1,4 +1,4 @@
-import { GET_CONTACTS, PUT_CONTACT, DELETE_CONTACT } from "./actions";
+import { PUT_CONTACT, DELETE_CONTACT } from "./actions";
 
 const initialState = {
   userID1: "Leonid Yakubovich",
@@ -7,13 +7,12 @@ const initialState = {
 
 export default function contactReducer(state = initialState, action) {
   switch (action.type) {
-    case GET_CONTACTS:
-      return { ...state };
-
     case PUT_CONTACT:
       return Object.assign({}, state, { [action.payload.userID]: action.payload.userName });
 
     case DELETE_CONTACT:
+      // don't use break before implement.
+      console.log("Not implemented");
     default:
       return state;
   }

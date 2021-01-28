@@ -1,4 +1,4 @@
-import { GET_MESSAGES, PUT_MESSAGE, DELETE_MESSAGE } from "./actions";
+import { PUT_MESSAGE, DELETE_MESSAGE } from "./actions";
 
 const initialState = {
   userID1: [
@@ -17,11 +17,7 @@ const initialState = {
 };
 
 export default function messageReducer(state = initialState, action) {
-  console.log(action);
   switch (action.type) {
-    case GET_MESSAGES:
-      return state[action.payload.userID] || [];
-
     case PUT_MESSAGE:
       if (!action.payload) return state;
 
@@ -39,6 +35,8 @@ export default function messageReducer(state = initialState, action) {
       return Object.assign({}, state, { ...messagesByUserID }, { messageID: state.messageID + 1 });
 
     case DELETE_MESSAGE:
+      // don't use break before implement.
+      console.log("Not implemented");
     default:
       return state;
   }

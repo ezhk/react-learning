@@ -10,7 +10,6 @@ import { putMessage } from "../store/message/actions";
 const RobotName = "Robot";
 
 const MessageField = ({ messages, putMessage, selectedContactID }) => {
-  console.log(messages);
   const [inputMessage, setInputMessage] = useState("");
 
   /**

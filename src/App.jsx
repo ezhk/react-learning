@@ -6,6 +6,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Profile from "./components/Profile";
 import Layout from "./components/Layout";
+import NotFound from "./components/NotFound";
 
 import { store } from "./store";
 
@@ -20,8 +21,11 @@ export default function App() {
             <Route path="/profile">
               <Profile />
             </Route>
-            <Route path={["/chat/:contactID", "/"]}>
+            <Route exact path={["/chat/:contactID", "/"]}>
               <Layout />
+            </Route>
+            <Route>
+              <NotFound />
             </Route>
           </Switch>
         </div>

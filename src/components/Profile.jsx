@@ -1,10 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 
-export default function Profile() {
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+
+export function Profile({ profile }) {
   return (
     <div className="profile">
       {/* pretty dog is here */}
-      <img className="profile-image" src="images/profile.svg" alt="" />
+      <img className="profile-image" src={profile.userpic} alt="" />
     </div>
   );
 }
+
+Profile.propTypes = {
+  profile: PropTypes.objectOf(PropTypes.string),
+};
+
+const mapStateToProps = (state) => {
+  return { profile: state.profile };
+};
+export default connect(mapStateToProps)(Profile);
