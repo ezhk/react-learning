@@ -3,8 +3,10 @@ import React from "react";
 import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 
+import { getProfile } from "../store/profile/selectors";
+
 export default function Profile() {
-  const profile = useSelector((state) => state.profile);
+  const profile = useSelector(getProfile);
 
   return (
     <div className="profile">
