@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { Redirect, Link } from "react-router-dom";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 
 import PropTypes from "prop-types";
 
 import { List, ListItemText } from "@material-ui/core";
 
-const ChatList = ({ contacts, selectedContactID }) => {
+const ChatList = ({ selectedContactID }) => {
+  const contacts = useSelector((state) => state.contact);
+
   /**
    * Define styles for contacts,
    * based on selected contact ID.
@@ -50,11 +52,7 @@ const ChatList = ({ contacts, selectedContactID }) => {
 };
 
 ChatList.propTypes = {
-  contacts: PropTypes.objectOf(PropTypes.string),
   selectedContactID: PropTypes.string,
 };
 
-const mapStateToProps = (state) => {
-  return { contacts: state.contact };
-};
-export default connect(mapStateToProps)(ChatList);
+export default ChatList;

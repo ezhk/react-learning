@@ -1,10 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 
-export function Header({ profile }) {
+export default function Header() {
+  const profile = useSelector((state) => state.profile);
+
   return (
     <div className="header">
       <Link className="header-link" to="/">
@@ -20,12 +22,3 @@ export function Header({ profile }) {
     </div>
   );
 }
-
-Header.propTypes = {
-  profile: PropTypes.objectOf(PropTypes.string),
-};
-
-const mapStateToProps = (state) => {
-  return { profile: state.profile };
-};
-export default connect(mapStateToProps)(Header);

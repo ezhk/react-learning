@@ -1,9 +1,11 @@
 import React from "react";
 
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 
-export function Profile({ profile }) {
+export default function Profile() {
+  const profile = useSelector((state) => state.profile);
+
   return (
     <div className="profile">
       {/* pretty dog is here */}
@@ -11,12 +13,3 @@ export function Profile({ profile }) {
     </div>
   );
 }
-
-Profile.propTypes = {
-  profile: PropTypes.objectOf(PropTypes.string),
-};
-
-const mapStateToProps = (state) => {
-  return { profile: state.profile };
-};
-export default connect(mapStateToProps)(Profile);

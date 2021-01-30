@@ -126,13 +126,11 @@ const MessageField = ({ messages, putMessage, selectedContactID }) => {
 MessageField.propTypes = {
   messages: PropTypes.any,
   putMessage: PropTypes.any,
+
   selectedContactID: PropTypes.string,
 };
 
-const mapStateToProps = (state) => {
-  return { messages: state.message };
-};
-const mapDispatchToProps = (dispatch) => {
-  return { putMessage: (payload) => dispatch(putMessage(payload)) };
-};
+const mapStateToProps = (state) => ({ messages: state.message });
+const mapDispatchToProps = { putMessage };
+
 export default connect(mapStateToProps, mapDispatchToProps)(MessageField);
