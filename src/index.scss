@@ -151,13 +151,35 @@ html, body {
   background-color: #d4bff9;
   border-radius: 5px;
 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
   &-root {
     margin: 0 !important;
   }
+
   &-link {
     color: unset;
     text-decoration: none;
   }
+  &-record {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &-button {
+    margin: 5px !important;
+  }
+}
+
+@keyframes contacts-blinker {
+  50% { opacity: 0.3; }
+}
+
+.delete-image {
+  margin: 3px;
+  width: 0.9rem;
 }
 
 .not-found {

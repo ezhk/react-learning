@@ -13,7 +13,8 @@ const initialState = {
       text: "World",
     },
   ],
-  messageID: 2,
+
+  latestMessageID: 2,
 };
 
 export default function messageReducer(state = initialState, action) {
@@ -25,18 +26,30 @@ export default function messageReducer(state = initialState, action) {
         [action.payload.userID]: [
           ...(state[action.payload.userID] || []),
           {
-            id: state.messageID,
+            id: state.latestMessageID,
             author: action.payload.author,
             text: action.payload.text,
           },
         ],
       };
 
-      return Object.assign({}, state, { ...messagesByUserID }, { messageID: state.messageID + 1 });
+      return {
+        ...state,
+        ...messagesByUserID,
+        latestMessageID: state.latestMessageID + 1,
+      };
 
     case DELETE_MESSAGE:
-      // don't use break before implement.
-      console.log("Not implemented");
+      // // don't use break before implement.
+      // console.log("Not implemented");
+      // console.log(state, action.payload.userID, action.payload.messageID);
+      if (!state[action.payload.userID]) return state;
+
+      const filteredMessagesByUserID = state[action.payload.userID].filter((msg) => msg.id != action.payload.messageID);
+      return {
+        ...state,
+        [action.payload.userID]: filteredMessagesByUserID,
+      };
     default:
       return state;
   }

@@ -5,9 +5,7 @@ import PropTypes from "prop-types";
 import { Button, TextField } from "@material-ui/core";
 
 import Message from "./Message";
-import { putMessage } from "../store/message/actions";
-
-const RobotName = "Robot";
+import { putMessage } from "../store/middlewares";
 
 const MessageField = ({ messages, putMessage, selectedContactID }) => {
   const [inputMessage, setInputMessage] = useState("");
@@ -20,24 +18,6 @@ const MessageField = ({ messages, putMessage, selectedContactID }) => {
   const appendMessage = (author, text) => {
     putMessage({ userID: selectedContactID, author, text });
   };
-
-  /**
-   * Autoreply by robot.
-   */
-  useEffect(() => {
-    let timeout;
-
-    const messagesByID = messages[selectedContactID] || [];
-    if (messagesByID.length && messagesByID[messagesByID.length - 1].author !== RobotName) {
-      timeout = setTimeout(() => {
-        appendMessage(RobotName, `i'm not hear something about "${messagesByID[messagesByID.length - 1].text}".`);
-      }, 2000);
-
-      return () => {
-        clearTimeout(timeout);
-      };
-    }
-  }, [messages]);
 
   /**
    * Click button event.
@@ -117,7 +97,7 @@ const MessageField = ({ messages, putMessage, selectedContactID }) => {
    * @param {string} message
    */
   const renderOneMessage = (message) => {
-    return <Message message={message} key={message.id} />;
+    return <Message message={message} userID={selectedContactID} key={message.id} />;
   };
 
   return <div className="message-field">{renderMessageField()}</div>;

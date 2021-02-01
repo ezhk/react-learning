@@ -1,16 +1,26 @@
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
 import { combineReducers } from "redux";
+
+import { composeWithDevTools } from "redux-devtools-extension";
+import thunk from "redux-thunk";
+
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 
 import contactReducer from "./contact/reducer";
 import messageReducer from "./message/reducer";
 import profileReducer from "./profile/reducer";
 
-export const mainReducer = combineReducers({
+const persistConfig = {
+  key: "messanger",
+  storage,
+};
+const mainReducer = combineReducers({
   contact: contactReducer,
   message: messageReducer,
   profile: profileReducer,
 });
-export const store = createStore(
-  mainReducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
+const persistedReducer = persistReducer(persistConfig, mainReducer);
+
+export const store = createStore(persistedReducer, composeWithDevTools(applyMiddleware(thunk)));
+export const persistor = persistStore(store);
