@@ -10,6 +10,7 @@ export default function Profile() {
     <div className="profile">
       {/* pretty dog is here */}
       <img className="profile-image" src={profile.userpic} alt="" />
+      <span>{profile.username}</span>
     </div>
   );
 }

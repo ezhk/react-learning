@@ -1,14 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 
 import { Button, TextField } from "@material-ui/core";
 
 import Message from "./Message";
-import { putMessage } from "../store/middlewares";
+import { addMessage, updateMessages } from "../store/middlewares";
+import { SelfAuthor } from "../constants";
 
-const MessageField = ({ messages, putMessage, selectedContactID }) => {
+const MessageField = ({ messages, addMessage, selectedContactID }) => {
+  const dispatch = useDispatch();
   const [inputMessage, setInputMessage] = useState("");
+
+  useEffect(() => {
+    dispatch(updateMessages());
+  }, []);
 
   /**
    * Store Object{author, text} to messages list for chosen contact.
@@ -16,7 +22,7 @@ const MessageField = ({ messages, putMessage, selectedContactID }) => {
    * @param {string} text
    */
   const appendMessage = (author, text) => {
-    putMessage({ userID: selectedContactID, author, text });
+    addMessage({ userID: selectedContactID, author, text });
   };
 
   /**
@@ -27,7 +33,7 @@ const MessageField = ({ messages, putMessage, selectedContactID }) => {
 
     // Ignore empty messages.
     if (inputMessage === "") return;
-    appendMessage("Me", inputMessage);
+    appendMessage(SelfAuthor, inputMessage);
 
     // Clean form input.
     setInputMessage("");
@@ -105,12 +111,12 @@ const MessageField = ({ messages, putMessage, selectedContactID }) => {
 
 MessageField.propTypes = {
   messages: PropTypes.any,
-  putMessage: PropTypes.any,
+  addMessage: PropTypes.any,
 
   selectedContactID: PropTypes.string,
 };
 
 const mapStateToProps = (state) => ({ messages: state.message });
-const mapDispatchToProps = { putMessage };
+const mapDispatchToProps = { addMessage };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MessageField);

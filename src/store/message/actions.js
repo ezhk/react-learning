@@ -1,8 +1,14 @@
-export const PUT_MESSAGE = "PUT_MESSAGE";
-export const DELETE_MESSAGE = "DELETE_MESSAGE";
+export const ADD_MESSAGE = "MESSAGE_ACTIONS::ADD";
+export const DELETE_MESSAGE = "MESSAGE_ACTIONS::DELETE";
+export const PUT_MESSAGES = "MESSAGE_ACTIONS::PUT";
 
-export const putMessage = (payload) => ({
-  type: PUT_MESSAGE,
+export const addMessage = (payload) => ({
+  type: ADD_MESSAGE,
+  payload,
+});
+
+export const putMessages = (payload) => ({
+  type: PUT_MESSAGES,
   payload,
 });
 

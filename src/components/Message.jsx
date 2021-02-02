@@ -7,10 +7,17 @@ import DeleteMessageDialog from "./dialogs/DeleteMessage";
 const Message = ({ userID, message }) => {
   const [openDeleteDialod, setOpenDeleteDialod] = useState(false);
 
+  /**
+   * Function open dialog for delete message.
+   */
   const handleDeleteMessage = () => {
     setOpenDeleteDialod(true);
   };
 
+  /**
+   * Collback function for DeleteMessageDialog component:
+   * switch open flag to false.
+   */
   const closeDeleteDialog = useCallback(() => {
     setOpenDeleteDialod(false);
   });
