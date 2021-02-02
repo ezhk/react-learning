@@ -22,7 +22,8 @@ const AddContactDialog = ({ open, handleCloseDialog }) => {
     setAccountName(event.target.value);
   };
 
-  const addAccount = () => {
+  const addAccount = (event) => {
+    event.preventDefault();
     if (!accountName) return;
 
     dispatch(
@@ -32,7 +33,7 @@ const AddContactDialog = ({ open, handleCloseDialog }) => {
         userName: accountName,
       })
     );
-    handleClose();
+    handleCloseDialog();
   };
 
   const handleClose = () => {
@@ -41,20 +42,22 @@ const AddContactDialog = ({ open, handleCloseDialog }) => {
   };
 
   return (
-    <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-      <DialogTitle id="form-dialog-title">Add account</DialogTitle>
-      <DialogContent>
-        <DialogContentText>Input new account name below.</DialogContentText>
-        <TextField type="text" autoFocus fullWidth value={accountName} onChange={handleAccountNameChange} />
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={addAccount} color="primary">
-          Add
-        </Button>
-        <Button onClick={handleClose} color="primary">
-          Cancel
-        </Button>
-      </DialogActions>
+    <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-add-contact">
+      <form onSubmit={addAccount}>
+        <DialogTitle id="form-dialog-add-contact">Add account</DialogTitle>
+        <DialogContent>
+          <DialogContentText>Input new account name below.</DialogContentText>
+          <TextField type="text" autoFocus={true} fullWidth value={accountName} onChange={handleAccountNameChange} />
+        </DialogContent>
+        <DialogActions>
+          <Button type="submit" color="primary" variant="outlined">
+            Add
+          </Button>
+          <Button onClick={handleClose} color="primary" variant="outlined">
+            Cancel
+          </Button>
+        </DialogActions>
+      </form>
     </Dialog>
   );
 };

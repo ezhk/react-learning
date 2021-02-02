@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import { Redirect, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import PropTypes from "prop-types";
@@ -16,24 +16,28 @@ const Contacts = ({ selectedContactID }) => {
   const [beingRemovedContact, setBeingRemovedContact] = useState(null);
 
   const contacts = useSelector((state) => state.contact);
-  const dispatcher = useDispatch();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    return dispatch(resetContactNotifications({ userID: selectedContactID }));
+  });
 
   const handleAddContact = () => {
     setOpenContactDialod(true);
   };
 
-  const closeContactDialog = () => {
+  const closeContactDialog = useCallback(() => {
     setOpenContactDialod(false);
-  };
+  });
 
   const handleDeleteContact = (userID) => {
     setBeingRemovedContact(userID);
     setOpenConfirmDeleteDialod(true);
   };
 
-  const closeDeleteContactDialog = () => {
+  const closeDeleteContactDialog = useCallback(() => {
     setOpenConfirmDeleteDialod(false);
-  };
+  });
 
   /**
    * Define styles for contacts,
@@ -43,7 +47,6 @@ const Contacts = ({ selectedContactID }) => {
   const contactStyle = (userID) => {
     // Compare string selectedContactID and number idx.
     if (selectedContactID === userID) {
-      dispatcher(resetContactNotifications({ userID: userID }));
       return { fontWeight: "bold" };
     }
 
@@ -69,7 +72,11 @@ const Contacts = ({ selectedContactID }) => {
           <div className="contacts-record">
             <span style={contactStyle(userID)}>
               {userDescription.name}
-              {contacts[userID].notifications ? ` — ${contacts[userID].notifications}` : null}
+
+              {/* Display notification only for unselected contacts */}
+              {selectedContactID !== userID && contacts[userID].notifications
+                ? ` — ${contacts[userID].notifications}`
+                : null}
             </span>
             <img
               className="delete-image"

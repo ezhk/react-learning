@@ -19,32 +19,35 @@ const DeleteContactDialog = ({ open, userID, handleCloseDialog }) => {
   const dispatch = useDispatch();
   const contactName = contact[userID] ? contact[userID].name : "null";
 
-  const handleClose = () => {
+  const handleClose = (event) => {
+    event.preventDefault();
     handleCloseDialog();
   };
 
   const handleDeleteContact = () => {
     dispatch(deleteContact({ userID: userID }));
-    handleClose();
+    handleCloseDialog();
   };
 
-  if (!userID) handleClose();
+  if (!userID) return null;
   return (
-    <Dialog open={open} onClose={handleCloseDialog} aria-labelledby="draggable-dialog-title">
-      <DialogTitle id="draggable-dialog-title">Remove account</DialogTitle>
-      <DialogContent>
-        <DialogContentText>
-          To remove account &quot;{contactName}&quot; from your contact list, please confirm it.
-        </DialogContentText>
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={handleDeleteContact} color="primary">
-          Confirm
-        </Button>
-        <Button autoFocus onClick={handleClose} color="primary">
-          Cancel
-        </Button>
-      </DialogActions>
+    <Dialog open={open} onClose={handleCloseDialog} aria-labelledby="draggable-dialog-delete-contact">
+      <form onSubmit={handleClose}>
+        <DialogTitle id="draggable-dialog-delete-contact">Remove account</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            To remove account &quot;{contactName}&quot; from your contact list, please confirm it.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleDeleteContact} color="primary" variant="outlined">
+            Confirm
+          </Button>
+          <Button autoFocus type="submit" color="primary" variant="outlined">
+            Cancel
+          </Button>
+        </DialogActions>
+      </form>
     </Dialog>
   );
 };

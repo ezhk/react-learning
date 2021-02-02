@@ -1,9 +1,13 @@
 import { increaseContactNotifications } from "./contact/actions";
 import { putMessage as putMessageAction } from "./message/actions";
 
+import { SelfAuthor } from "../constants";
+
 export const putMessage = (payload) => (dispatch, getState) => {
   dispatch(putMessageAction(payload));
-  dispatch(increaseContactNotifications({ userID: payload.userID }));
+  if (payload.author !== SelfAuthor) {
+    dispatch(increaseContactNotifications({ userID: payload.userID }));
+  }
 
   /**
    * Autoreply by robot.

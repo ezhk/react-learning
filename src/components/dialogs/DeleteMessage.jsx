@@ -17,30 +17,33 @@ import { deleteMessage } from "../../store/message/actions";
 const DeleteMessageDialog = ({ open, userID, messageID, handleCloseDialog }) => {
   const dispatch = useDispatch();
 
-  const handleClose = () => {
+  const handleClose = (event) => {
+    event.preventDefault();
     handleCloseDialog();
   };
 
   const handleDeleteMessage = () => {
     dispatch(deleteMessage({ userID, messageID }));
-    handleClose();
+    handleCloseDialog();
   };
 
-  if (!messageID) handleClose();
+  if (!messageID) return null;
   return (
-    <Dialog open={open} onClose={handleCloseDialog} aria-labelledby="draggable-dialog-title">
-      <DialogTitle id="draggable-dialog-title">Remove messagge</DialogTitle>
-      <DialogContent>
-        <DialogContentText>Please confirm message removing.</DialogContentText>
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={handleDeleteMessage} color="primary">
-          Confirm
-        </Button>
-        <Button autoFocus onClick={handleClose} color="primary">
-          Cancel
-        </Button>
-      </DialogActions>
+    <Dialog open={open} onClose={handleCloseDialog} aria-labelledby="draggable-dialog-delete-message">
+      <form onSubmit={handleClose}>
+        <DialogTitle id="draggable-dialog-delete-message">Remove messagge</DialogTitle>
+        <DialogContent>
+          <DialogContentText>Please confirm message removing.</DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleDeleteMessage} color="primary" variant="outlined">
+            Confirm
+          </Button>
+          <Button autoFocus type="submit" color="primary" variant="outlined">
+            Cancel
+          </Button>
+        </DialogActions>
+      </form>
     </Dialog>
   );
 };
@@ -48,7 +51,7 @@ const DeleteMessageDialog = ({ open, userID, messageID, handleCloseDialog }) => 
 DeleteMessageDialog.propTypes = {
   open: PropTypes.bool,
   userID: PropTypes.string,
-  messageID: PropTypes.number,
+  messageID: PropTypes.string,
   handleCloseDialog: PropTypes.func,
 };
 

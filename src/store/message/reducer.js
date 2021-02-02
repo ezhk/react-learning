@@ -3,18 +3,16 @@ import { PUT_MESSAGE, DELETE_MESSAGE } from "./actions";
 const initialState = {
   userID1: [
     {
-      id: 0,
+      id: "0-4bpvd1w02b",
       author: "Leonid Yakubovich",
       text: "Hello",
     },
     {
-      id: 1,
+      id: "1-89gmarvzbg",
       author: "Me",
       text: "World",
     },
   ],
-
-  latestMessageID: 2,
 };
 
 export default function messageReducer(state = initialState, action) {
@@ -22,11 +20,15 @@ export default function messageReducer(state = initialState, action) {
     case PUT_MESSAGE:
       if (!action.payload) return state;
 
+      const recvMessageID =
+        `${state[action.payload.userID] ? state[action.payload.userID].length : 0}-` +
+        Math.random().toString(36).substr(2, 10);
+
       const messagesByUserID = {
         [action.payload.userID]: [
           ...(state[action.payload.userID] || []),
           {
-            id: state.latestMessageID,
+            id: recvMessageID,
             author: action.payload.author,
             text: action.payload.text,
           },
@@ -36,13 +38,9 @@ export default function messageReducer(state = initialState, action) {
       return {
         ...state,
         ...messagesByUserID,
-        latestMessageID: state.latestMessageID + 1,
       };
 
     case DELETE_MESSAGE:
-      // // don't use break before implement.
-      // console.log("Not implemented");
-      // console.log(state, action.payload.userID, action.payload.messageID);
       if (!state[action.payload.userID]) return state;
 
       const filteredMessagesByUserID = state[action.payload.userID].filter((msg) => msg.id != action.payload.messageID);

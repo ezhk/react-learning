@@ -21,7 +21,7 @@ export default function contactReducer(state = initialState, action) {
 
     case RESET_CONTACT_NOTIFICATIONS:
       // Empty changes, if notifications are equal zero.
-      if (!state[action.payload.userID].notifications) {
+      if (!state[action.payload.userID] || !state[action.payload.userID].notifications) {
         return state;
       }
 
@@ -36,9 +36,6 @@ export default function contactReducer(state = initialState, action) {
       return newState;
 
     case DELETE_CONTACT:
-      // don't use break before implement.
-      console.log("Not implemented", action.payload.userID);
-
       return Object.fromEntries(Object.entries(state).filter(([userID, _]) => userID !== action.payload.userID));
     default:
       return state;
