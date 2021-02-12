@@ -1,8 +1,21 @@
-export const PUT_CONTACT = "PUT_CONTACT";
-export const DELETE_CONTACT = "DELETE_CONTACT";
+export const INCREASE_CONTACT_NOTIFICATIONS = "CONTACT_ACTIONS::INCREASE_NOTIFICATIONS";
+export const RESET_CONTACT_NOTIFICATIONS = "CONTACT_ACTIONS::RESET_NOTIFICATIONS";
 
-export const putContact = (payload) => ({
-  type: PUT_CONTACT,
+export const ADD_CONTACT = "CONTACT_ACTIONS::ADD";
+export const DELETE_CONTACT = "CONTACT_ACTIONS::DELETE";
+
+export const increaseContactNotifications = (payload) => ({
+  type: INCREASE_CONTACT_NOTIFICATIONS,
+  payload,
+});
+
+export const resetContactNotifications = (payload) => ({
+  type: RESET_CONTACT_NOTIFICATIONS,
+  payload,
+});
+
+export const addContact = (payload) => ({
+  type: ADD_CONTACT,
   payload,
 });
 

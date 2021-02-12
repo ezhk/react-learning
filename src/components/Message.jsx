@@ -1,15 +1,29 @@
-import React from "react";
+import React, { useState, useCallback } from "react";
 import PropTypes from "prop-types";
 
-const selfAuthor = "Me";
+import { SelfAuthor } from "../constants";
+import DeleteMessageDialog from "./dialogs/DeleteMessage";
 
-const Message = ({ message }) => {
+const Message = ({ userID, message }) => {
+  const [openDeleteDialod, setOpenDeleteDialod] = useState(false);
+
+  const handleDeleteMessage = () => {
+    setOpenDeleteDialod(true);
+  };
+
+  const closeDeleteDialog = useCallback(() => {
+    setOpenDeleteDialod(false);
+  });
+
   /**
    * Align message, based in author name.
    */
   const messageStyle = () => {
-    if (message.author === selfAuthor) {
-      return { justifyContent: "flex-end" };
+    if (message.author === SelfAuthor) {
+      return {
+        justifyContent: "flex-start",
+        flexDirection: "row-reverse",
+      };
     }
 
     return { justifyContent: "flex-start" };
@@ -17,17 +31,26 @@ const Message = ({ message }) => {
 
   return (
     <div className="message" style={messageStyle()}>
+      <img className="delete-image" src="/images/delete-message.svg" alt="del" onClick={handleDeleteMessage} />
       <div className="message-text">
-        {message.author !== selfAuthor ? `${message.author}: ` : null}
+        {message.author !== SelfAuthor ? `${message.author}: ` : null}
         {message.text}
       </div>
+
+      <DeleteMessageDialog
+        open={openDeleteDialod}
+        userID={userID}
+        messageID={message.id}
+        handleCloseDialog={closeDeleteDialog}
+      />
     </div>
   );
 };
 
 Message.propTypes = {
+  userID: PropTypes.string,
   message: PropTypes.exact({
-    id: PropTypes.number,
+    id: PropTypes.string,
     author: PropTypes.string,
     text: PropTypes.string,
   }),
