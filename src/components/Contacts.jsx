@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 
 import { List, ListItemText, Button } from "@material-ui/core";
 import { resetContactNotifications } from "../store/contact/actions";
+import { updateContacts } from "../store/middlewares";
 
 import AddContactDialog from "./dialogs/AddContact";
 import DeleteContactDialog from "./dialogs/DeleteContact";
@@ -19,22 +20,41 @@ const Contacts = ({ selectedContactID }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(updateContacts());
+  }, []);
+  useEffect(() => {
+    // Reset notifications for user, when living active chat.
     return dispatch(resetContactNotifications({ userID: selectedContactID }));
   });
 
+  /**
+   * Function open dialog for add contact.
+   */
   const handleAddContact = () => {
     setOpenContactDialod(true);
   };
 
+  /**
+   * Collback function for AddContactDialog component:
+   * switch open flag to false.
+   */
   const closeContactDialog = useCallback(() => {
     setOpenContactDialod(false);
   });
 
+  /**
+   * Setup currect removing contact and show confirm popup.
+   * @param {string} userID
+   */
   const handleDeleteContact = (userID) => {
     setBeingRemovedContact(userID);
     setOpenConfirmDeleteDialod(true);
   };
 
+  /**
+   * Collback function for DeleteContactDialog component:
+   * switch open flag to false.
+   */
   const closeDeleteContactDialog = useCallback(() => {
     setOpenConfirmDeleteDialod(false);
   });

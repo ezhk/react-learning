@@ -1,17 +1,12 @@
-import { INCREASE_CONTACT_NOTIFICATIONS, RESET_CONTACT_NOTIFICATIONS, ADD_CONTACT, DELETE_CONTACT } from "./actions";
+import {
+  INCREASE_CONTACT_NOTIFICATIONS,
+  RESET_CONTACT_NOTIFICATIONS,
+  ADD_CONTACT,
+  DELETE_CONTACT,
+  PUT_CONTACTS,
+} from "./actions";
 
-const initialState = {
-  userID1: {
-    name: "Leonid Yakubovich",
-    notifications: 0,
-  },
-  userID2: {
-    name: "Chuck Norris",
-    notifications: 0,
-  },
-};
-
-export default function contactReducer(state = initialState, action) {
+export default function contactReducer(state = {}, action) {
   const newState = { ...state };
 
   switch (action.type) {
@@ -37,6 +32,12 @@ export default function contactReducer(state = initialState, action) {
 
     case DELETE_CONTACT:
       return Object.fromEntries(Object.entries(state).filter(([userID, _]) => userID !== action.payload.userID));
+
+    case PUT_CONTACTS:
+      return {
+        ...state,
+        ...action.payload,
+      };
     default:
       return state;
   }

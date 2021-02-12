@@ -1,0 +1,14 @@
+{
+  "userID1": {
+    "name": "Leonid Yakubovich",
+    "notifications": 0
+  },
+  "userID2": {
+    "name": "Chuck Norris",
+    "notifications": 0
+  },
+  "userID3": {
+    "name": "fetched username",
+    "notifications": 0
+  }
+}

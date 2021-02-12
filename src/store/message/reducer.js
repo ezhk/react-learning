@@ -1,23 +1,8 @@
-import { PUT_MESSAGE, DELETE_MESSAGE } from "./actions";
+import { ADD_MESSAGE, DELETE_MESSAGE, PUT_MESSAGES } from "./actions";
 
-const initialState = {
-  userID1: [
-    {
-      id: "0-4bpvd1w02b",
-      author: "Leonid Yakubovich",
-      text: "Hello",
-    },
-    {
-      id: "1-89gmarvzbg",
-      author: "Me",
-      text: "World",
-    },
-  ],
-};
-
-export default function messageReducer(state = initialState, action) {
+export default function messageReducer(state = {}, action) {
   switch (action.type) {
-    case PUT_MESSAGE:
+    case ADD_MESSAGE:
       if (!action.payload) return state;
 
       const recvMessageID =
@@ -48,6 +33,13 @@ export default function messageReducer(state = initialState, action) {
         ...state,
         [action.payload.userID]: filteredMessagesByUserID,
       };
+
+    case PUT_MESSAGES:
+      return {
+        ...state,
+        ...action.payload,
+      };
+
     default:
       return state;
   }
