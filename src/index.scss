@@ -65,7 +65,7 @@ html, body {
   flex-grow: 1;
 
   display: flex;
-  flex-direction: row;
+  flex-direction: row-reverse;
 }
 
 .title {
@@ -127,8 +127,6 @@ html, body {
     width: 150px;
     margin-left: 10px !important;
   }
-
-
 }
 
 .message {
@@ -191,4 +189,34 @@ html, body {
   font-size: 2rem;
   height: 100%;
   width: 100%;
+}
+
+
+@media only screen and (max-width: 600px) {
+  .contacts {
+    width: 5%;
+    content-visibility: hidden;
+  }
+  .message-field {
+    width: 95%;
+    content-visibility: visible;
+  }
+
+  /* Show contacts on hover. */
+  .contacts:hover {
+    width: 95%;
+    content-visibility: visible;
+  }
+  .contacts:hover ~ .message-field {
+    width: 5%;
+    content-visibility: hidden;
+
+    // arrow-rigth.svg: sass cannot use relative path to public/images
+    background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMiAyMiI+PGRlZnM+PGNsaXBQYXRoPjxwYXRoIGZpbGw9IiMwMGYiIGZpbGwtb3BhY2l0eT0iLjUxNCIgZD0ibS03IDEwMjQuMzZoMzR2MzRoLTM0eiIvPjwvY2xpcFBhdGg+PGNsaXBQYXRoPjxwYXRoIGZpbGw9IiNhYWRlODciIGZpbGwtb3BhY2l0eT0iLjQ3MiIgZD0ibS02IDEwMjguMzZoMzJ2MzJoLTMyeiIvPjwvY2xpcFBhdGg+PC9kZWZzPjxwYXRoIGQ9Im0zNDUuNDQgMjQ4LjI5bC0xOTQuMjkgMTk0LjI4Yy0xMi4zNTkgMTIuMzY1LTMyLjM5NyAxMi4zNjUtNDQuNzUgMC0xMi4zNTQtMTIuMzU0LTEyLjM1NC0zMi4zOTEgMC00NC43NDRsMTcxLjkxLTE3MS45MS0xNzEuOTEtMTcxLjljLTEyLjM1NC0xMi4zNTktMTIuMzU0LTMyLjM5NCAwLTQ0Ljc0OCAxMi4zNTQtMTIuMzU5IDMyLjM5MS0xMi4zNTkgNDQuNzUgMGwxOTQuMjkgMTk0LjI4YzYuMTc3IDYuMTggOS4yNjIgMTQuMjcxIDkuMjYyIDIyLjM2NiAwIDguMDk5LTMuMDkxIDE2LjE5Ni05LjI2NyAyMi4zNzMiIHRyYW5zZm9ybT0ibWF0cml4KC4wMzU0MS0uMDAwMTMuMDAwMTMuMDM1NDEgMi45OCAzLjAyKSIgZmlsbD0iIzRkNGQ0ZCIvPjwvc3ZnPg==") no-repeat center;
+    transform: rotate(180deg);
+  }
+
+  .message-field-helper {
+    margin-left: 10px;
+  }
 }
