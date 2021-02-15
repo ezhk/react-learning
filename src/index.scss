@@ -138,7 +138,7 @@ html, body {
   margin-bottom: 3px;
 
   &-text {
-    display: inline-flex;
+    display: block;
     border-radius: 3px;
 
     padding: 3px 5px;
@@ -205,16 +205,15 @@ html, body {
     width: 13%;
 
     &-wrapper {
-      visibility: hidden;
-      content-visibility: hidden;
+      display: none;
     }
   }
   .message-field {
     width: 87%;
+    padding-left: 5px;
 
     &-wrapper {
-      visibility: visible;
-      content-visibility: visible;
+      display: contents;
     }
   }
 
@@ -230,14 +229,12 @@ html, body {
       transform: rotate(180deg);
 
       & .message-field-wrapper, & .message-field-helper {
-        visibility: hidden;
-        content-visibility: hidden;
+        display: none;
       }
     }
 
     & .contacts-wrapper {
-      visibility: visible;
-      content-visibility: visible;
+      display: contents;
     }
   }
 
