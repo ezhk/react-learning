@@ -117,19 +117,21 @@ const Contacts = ({ selectedContactID }) => {
 
   return (
     <div className="contacts">
-      <div>
-        <span className="title">Contacts</span>
-        <List>{Object.entries(contacts).map(renderContactList)}</List>
+      <div className="contacts-wrapper">
+        <div>
+          <span className="title">Contacts</span>
+          <List>{Object.entries(contacts).map(renderContactList)}</List>
+        </div>
+        <Button className="contacts-button" onClick={handleAddContact}>
+          Add
+        </Button>
+        <AddContactDialog open={openContactDialod} handleCloseDialog={closeContactDialog} />
+        <DeleteContactDialog
+          open={openConfirmDeleteDialod}
+          userID={beingRemovedContact}
+          handleCloseDialog={closeDeleteContactDialog}
+        />
       </div>
-      <Button className="contacts-button" onClick={handleAddContact}>
-        Add
-      </Button>
-      <AddContactDialog open={openContactDialod} handleCloseDialog={closeContactDialog} />
-      <DeleteContactDialog
-        open={openConfirmDeleteDialod}
-        userID={beingRemovedContact}
-        handleCloseDialog={closeDeleteContactDialog}
-      />
     </div>
   );
 };
