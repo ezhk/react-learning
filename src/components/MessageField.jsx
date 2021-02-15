@@ -63,7 +63,6 @@ const MessageField = ({ messages, addMessage, selectedContactID }) => {
         <span className="title">Messages</span>
         <div className="message-field-messages">{renderMessages()}</div>
 
-        <br />
         <form className="message-field-form" onSubmit={submitMessage}>
           <TextField
             id="standard-basic"
