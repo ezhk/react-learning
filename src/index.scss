@@ -167,6 +167,8 @@ html, body {
   flex-direction: column;
   justify-content: space-between;
 
+  overflow-y: scroll;
+
   &-wrapper {
     display: contents;
   }
