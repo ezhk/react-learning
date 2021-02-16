@@ -78,7 +78,7 @@ function registerAppInstallation() {
 }
 
 /**
- * Mobile sited wrong define sites height to 100vh,
+ * Mobile sites wrong define site's height to 100vh,
  * need to calculate it in JS and setup as var() to CSS.
  */
 function setupSiteHeight() {
