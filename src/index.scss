@@ -65,6 +65,7 @@ html, body {
 .container {
   margin: 0 5px;
   flex-grow: 1;
+  max-height: calc(var(--site-height, 100vh) - 120px);
 
   display: flex;
   flex-direction: row-reverse;

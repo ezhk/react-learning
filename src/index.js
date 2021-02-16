@@ -28,6 +28,9 @@ registerPushEvents();
 // Register WPA install.
 registerAppInstallation();
 
+// Setup fixed height for messages.
+setupSiteHeight();
+
 function registerServiceWorker() {
   if (!("serviceWorker" in navigator)) return;
 
@@ -72,4 +75,18 @@ function registerAppInstallation() {
       credentials: "include",
     });
   });
+}
+
+/**
+ * Mobile sited wrong define sites height to 100vh,
+ * need to calculate it in JS and setup as var() to CSS.
+ */
+function setupSiteHeight() {
+  const defineSiteHeight = () => {
+    const doc = document.documentElement;
+    doc.style.setProperty("--site-height", `${window.innerHeight}px`);
+  };
+
+  window.addEventListener("resize", defineSiteHeight);
+  defineSiteHeight();
 }
