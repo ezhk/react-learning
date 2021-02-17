@@ -59,11 +59,10 @@ const MessageField = ({ messages, addMessage, selectedContactID }) => {
     }
 
     return (
-      <>
+      <div className="message-field-wrapper">
         <span className="title">Messages</span>
         <div className="message-field-messages">{renderMessages()}</div>
 
-        <br />
         <form className="message-field-form" onSubmit={submitMessage}>
           <TextField
             id="standard-basic"
@@ -83,7 +82,7 @@ const MessageField = ({ messages, addMessage, selectedContactID }) => {
             Send
           </Button>
         </form>
-      </>
+      </div>
     );
   };
 

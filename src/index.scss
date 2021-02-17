@@ -22,6 +22,8 @@ html, body {
   margin: 5px;
 
   height: 50px;
+  min-height: 50px;
+
   line-height: 50px;
   font-size: 1.2rem;
 
@@ -63,9 +65,10 @@ html, body {
 .container {
   margin: 0 5px;
   flex-grow: 1;
+  max-height: calc(var(--site-height, 100vh) - 120px);
 
   display: flex;
-  flex-direction: row;
+  flex-direction: row-reverse;
 }
 
 .title {
@@ -93,11 +96,15 @@ html, body {
 }
 
 .message-field {
-  height: 100%;
-  width: 80%;
-
   display: flex;
   flex-direction: column;
+
+  width: 80%;
+  padding-left: 5px;
+
+  &-wrapper {
+    display: contents;
+  }
 
   &-helper {
     display: flex;
@@ -113,12 +120,18 @@ html, body {
 
   &-messages {
     flex-grow: 1;
+    overflow-y: scroll;
   }
 
   &-form {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+
+    height: 45px;
+    min-height: 45px;
+
+    margin-top: 5px;
   }
   &-input {
     width: 100%;
@@ -127,8 +140,6 @@ html, body {
     width: 150px;
     margin-left: 10px !important;
   }
-
-
 }
 
 .message {
@@ -136,7 +147,7 @@ html, body {
   margin-bottom: 3px;
 
   &-text {
-    display: inline-flex;
+    display: block;
     border-radius: 3px;
 
     padding: 3px 5px;
@@ -155,6 +166,12 @@ html, body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  overflow-y: scroll;
+
+  &-wrapper {
+    display: contents;
+  }
 
   &-root {
     margin: 0 !important;
@@ -180,6 +197,8 @@ html, body {
 
 .delete-image {
   margin: 3px;
+
+  height: 0.9rem;
   width: 0.9rem;
 }
 
@@ -191,4 +210,47 @@ html, body {
   font-size: 2rem;
   height: 100%;
   width: 100%;
+}
+
+
+@media only screen and (max-width: 600px) {
+  .contacts {
+    width: 13%;
+
+    &-wrapper {
+      display: none;
+    }
+  }
+  .message-field {
+    width: 87%;
+
+    &-wrapper {
+      display: contents;
+    }
+  }
+
+  /* Show contacts on hover. */
+  .contacts:hover {
+    width: 87%;
+
+    & ~ .message-field {
+      width: 13%;
+
+      // arrow-rigth.svg: sass cannot use relative path to public/images
+      background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMiAyMiI+PGRlZnM+PGNsaXBQYXRoPjxwYXRoIGZpbGw9IiMwMGYiIGZpbGwtb3BhY2l0eT0iLjUxNCIgZD0ibS03IDEwMjQuMzZoMzR2MzRoLTM0eiIvPjwvY2xpcFBhdGg+PGNsaXBQYXRoPjxwYXRoIGZpbGw9IiNhYWRlODciIGZpbGwtb3BhY2l0eT0iLjQ3MiIgZD0ibS02IDEwMjguMzZoMzJ2MzJoLTMyeiIvPjwvY2xpcFBhdGg+PC9kZWZzPjxwYXRoIGQ9Im0zNDUuNDQgMjQ4LjI5bC0xOTQuMjkgMTk0LjI4Yy0xMi4zNTkgMTIuMzY1LTMyLjM5NyAxMi4zNjUtNDQuNzUgMC0xMi4zNTQtMTIuMzU0LTEyLjM1NC0zMi4zOTEgMC00NC43NDRsMTcxLjkxLTE3MS45MS0xNzEuOTEtMTcxLjljLTEyLjM1NC0xMi4zNTktMTIuMzU0LTMyLjM5NCAwLTQ0Ljc0OCAxMi4zNTQtMTIuMzU5IDMyLjM5MS0xMi4zNTkgNDQuNzUgMGwxOTQuMjkgMTk0LjI4YzYuMTc3IDYuMTggOS4yNjIgMTQuMjcxIDkuMjYyIDIyLjM2NiAwIDguMDk5LTMuMDkxIDE2LjE5Ni05LjI2NyAyMi4zNzMiIHRyYW5zZm9ybT0ibWF0cml4KC4wMzU0MS0uMDAwMTMuMDAwMTMuMDM1NDEgMi45OCAzLjAyKSIgZmlsbD0iIzRkNGQ0ZCIvPjwvc3ZnPg==") no-repeat center;
+      transform: rotate(180deg);
+
+      & .message-field-wrapper, & .message-field-helper {
+        display: none;
+      }
+    }
+
+    & .contacts-wrapper {
+      display: contents;
+    }
+  }
+
+  .message-field-helper {
+    margin-left: 10px;
+  }
 }

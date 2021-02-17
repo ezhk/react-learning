@@ -9,8 +9,8 @@ export default function Layout() {
 
   return (
     <>
-      <MessageField className="message-field" selectedContactID={contactID} />
       <Contacts className="chat-list" selectedContactID={contactID} />
+      <MessageField className="message-field" selectedContactID={contactID} />
     </>
   );
 }
